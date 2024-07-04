@@ -46,9 +46,3 @@ Technologies Utilisées
 
 
 
-
-
-Lancer tailwind
- php bin/console tailwind:build --watch
-
- 
