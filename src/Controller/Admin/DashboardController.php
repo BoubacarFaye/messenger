@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Entity\Post;
+use App\Entity\Comment;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Menu\UrlMenuItem;
@@ -18,14 +19,13 @@ class DashboardController extends AbstractDashboardController
     public function index(): Response
     {
 
-                /** @var AdminUrlGenerator $routeBuilder */
-                $routeBuilder = $this->container->get(AdminUrlGenerator::class);
-                $url = $routeBuilder
-                    ->setController(UserCrudController::class)
-                    ->generateUrl();
-                 return $this->redirect($url);
+        /** @var AdminUrlGenerator $routeBuilder */
+        $routeBuilder = $this->container->get(AdminUrlGenerator::class);
+        $url = $routeBuilder
+            ->setController(UserCrudController::class)
+            ->generateUrl();
+            return $this->redirect($url);
 
-        // return parent::index();
     }
 
 
@@ -57,5 +57,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Users', 'fas fa-list', User::class);
         yield MenuItem::linkToCrud('Posts', 'fas fa-list', Post::class);
+        yield MenuItem::linkToCrud('comments', 'fas fa-list', Comment::class);
     }
 }
