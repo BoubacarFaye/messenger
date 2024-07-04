@@ -1,20 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Messagerie{% endblock %}
 
 {% block body %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Nouveau Posts</h1>
+    <div class="messages py-5">
+        {% for message in messages %}
+            <article class="message w-1/2 py-10">
+                <div class="flex justify-between">
+                    <h2><a href="">{{ message.username }}</a></h2>
+                    {% if message.likesNumber > 0 %}
+                    <button class="like-btn">{{ message.likesNumber }} &#10084;</button>
+                    {% else %}
+                    <button class="like-btn">&#10084;</button>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>D:/supdeWeb/symfony/projet/messenger/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>D:/supdeWeb/symfony/projet/messenger/templates/home/index.html.twig</code></li>
-    </ul>
-</div>
+                    {% endif %}
+                </div>
+
+                {% if message.media %}
+                <img src="{{ message.media }}" width="32px" height="28px"/>
+                {%  endif %}
+                <p class=" shadow shadow-gray-400 p-2">{{ message.content }} </p>
+                <div class="flex justify-between">
+
+                <p class="text-xs">le: {{ message.posted_at|date('Y-m-d H:i')  }}</p>
+                {% if message.commentNumber > 0 %}
+                <a href="/comment/post/{{ message.id }}" class="text-amber-600 text-s">{{ message.commentNumber}} commentaires</a>
+                {% else %}
+                <a href="/comment/post/{{ message.id }}" class="text-s">ajouter un commentaire</a>
+                {% endif %}
+                </div>
+            </article>
+        {% else %}
+            <p>Aucun message à afficher.</p>
+        {% endfor %}
+    </div>
+
+
 {% endblock %}
