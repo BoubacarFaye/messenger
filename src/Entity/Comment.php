@@ -38,6 +38,7 @@ class Comment
     public function __construct()
     {
         $this->likes = new ArrayCollection();
+        $this->posted_at = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
