@@ -13,14 +13,14 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        // ! mot de passe non salé
+
         $faker = Factory::create();
         $numberCreated = 50;
         $newUsersList = [];
         //creation users
         for ($i=0; $i < $numberCreated; $i++)
         {
-            $user = new Users();
+            $user = new User();
             $user->setUsername($faker->userName);
             $user->setRoles(['ROLE_USER']);
             $user->setEmail($faker->email);
@@ -34,8 +34,8 @@ class AppFixtures extends Fixture
         $userList = $manager->getRepository(User::class)->findAll();
 
 
-        //création posts selon nombre au hasard
-        $maxPosts = 5;
+        //création posts par user selon nombre au hasard
+        $maxPosts = 7;
         foreach($userList as $user)
         {
             $nbPosts = mt_rand(0,$maxPosts);
@@ -78,9 +78,10 @@ class AppFixtures extends Fixture
         //création likes
         foreach($userList as $user)
         {
-            if (mt_rand(0,3) == 0)
+            if (mt_rand(0,8)== 5)
             {
-                if (mt_rand(0,6) == 0)
+                $rand = mt_rand(0,1);
+                if ($rand == 0)
                 {
                     foreach ($postList as $post) {
                         $postLike = new Like();
@@ -89,7 +90,7 @@ class AppFixtures extends Fixture
                         $manager->persist($postLike);
                     }
                 }
-                elseif (mt_rand(0,6) == 6)
+                elseif ($rand == 1)
                 {
                     foreach ($commentList as $comment) {
                         if (mt_rand(0,4) == 0){
@@ -101,6 +102,7 @@ class AppFixtures extends Fixture
                     }
                 }
             }
+
         };
 
 
