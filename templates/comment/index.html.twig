@@ -1,14 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Messagerie - nouveau commentaire{% endblock %}
+{% block title %}Messagerie - Commentaires{% endblock %}
 
 {% block body %}
+    <div><a href="/">Retour</a></div>
+    {% if count > 0 %}
     <div class="list-comments">
         <ul class="flex flex-col gap-4 ">
         {% for comment in comments %}
             <li class="w-96 rounded shadow-lg p-3">
                 <div class="flex justify-between w-full">
-                    <h2>{{ comment.username }}</h2>
+                    <h2 class="text-l">{{ comment.username }}</h2>
                     <button title="J'aime">{{ comment.likesNumber }}&#10084;</button>
                 </div>
                 <p class="shadow shadow-gray-400 p-2 overflow-y-scroll">{{ comment.content}}</p>
@@ -17,6 +19,7 @@
         {% endfor %}
         </ul>
     </div>
-   
+    {% endif %}
+    <div><a href="/comment/{{ parentPost }}/new">ajouter un commentaire</a></div>
 
 {% endblock %}
