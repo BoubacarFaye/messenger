@@ -42,7 +42,14 @@ Technologies Utilisées
 - Symfony 7 et PHP 8.3
 - Base de données : MySQL
 - Frontend : Twig, HTML5, CSS3 et Tailwind
-- Contrôle de version : Git
 
 
+.symfony.local.yaml lance:
+-symfony
+-tailwind
 
+il manque:
+- event subscriber
+- création posts/commentaires
+- cta likes
+- user login
