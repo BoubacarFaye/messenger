@@ -53,3 +53,13 @@ il manque:
 - création posts/commentaires
 - cta likes
 - user login
+
+
+Creation BDD "app"
+symfony console doctrine:database:create
+
+Migration
+symfony.exe console doctrine:migrations:migrate
+
+ajout fakes données
+symfony console doctrine:fixtures:load
