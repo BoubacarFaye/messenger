@@ -1,13 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Messagerie{% endblock %}
+{% block title %}{{ 'messenger'|trans }}{% endblock %}
 
 {% block body %}
 <style>
+h1{
+    text-tranform: capitalize;
+}
 
 </style>
 
-    <h1>Nouveau Posts</h1>
+    <h1>{{ 'newest_posts'|trans }}</h1>
     <div class="messages py-5">
         {% for message in messages %}
             <article class="message w-1/2 py-10">
@@ -27,7 +30,7 @@
                 <p class=" shadow shadow-gray-400 p-2">{{ message.content }} </p>
                 <div class="flex justify-between">
 
-                <p class="text-xs">le: {{ message.posted_at|date('Y-m-d H:i')  }}</p>
+                <p class="text-xs">{{ 'posted_at'|trans}}: {{ message.posted_at|date('Y-m-d H:i')  }}</p>
                 {% if message.commentNumber > 0 %}
                 <a href="/comment/post/{{ message.id }}" class="text-amber-600 text-s">{{ message.commentNumber}} commentaires</a>
                 {% else %}
