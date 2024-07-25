@@ -15,15 +15,16 @@ class PostRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Post::class);
     }
-    
-    public function fetchPostsWithUsername(){
+
+    public function fetchPostsWithUsername()
+    {
         $qb = $this->createQueryBuilder('p');
 
-        $qb->select('p.id','p.content','p.media', 'p.posted_at', 'u.username','COUNT(c.id) AS commentNumber', 'COUNT(l.id) AS likesNumber')
-        ->leftJoin('p.user_id','u')
-        ->leftJoin('p.comments','c')
-        ->leftJoin('p.likes','l')
-        ->groupBy('p.id');
+        $qb->select('p.id', 'p.content', 'p.media', 'p.posted_at', 'u.username', 'COUNT(DISTINCT c.id) AS commentNumber', 'COUNT(DISTINCT l.id) AS likesNumber')
+            ->leftJoin('p.user_id', 'u')
+            ->leftJoin('p.comments', 'c')
+            ->leftJoin('p.likes', 'l')
+            ->groupBy('p.id');
         $query = $qb->getQuery();
         $results = $query->getResult();
 

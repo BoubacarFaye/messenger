@@ -23,7 +23,6 @@ class CommentController extends AbstractController
 
         $commentsList = $this->CommentRepository->fetchComments($postId);
         $count = count($commentsList);
-        
         return $this->render('comment/index.html.twig', [
             'comments' => $commentsList,
             'count' => $count,

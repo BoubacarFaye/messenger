@@ -35,7 +35,7 @@ class AppFixtures extends Fixture
 
 
         //création posts par user selon nombre au hasard
-        $maxPosts = 7;
+        $maxPosts = 15;
         foreach($userList as $user)
         {
             $nbPosts = mt_rand(0,$maxPosts);

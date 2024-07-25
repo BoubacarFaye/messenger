@@ -15,15 +15,16 @@ class CommentRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Comment::class);
     }
-    public function fetchComments(int $postId){
+    public function fetchComments(int $postId)
+    {
         $qb = $this->createQueryBuilder('c');
 
-        $qb->select('c.id','c.content','c.posted_at', 'u.username', 'COUNT(l.id) AS likesNumber')
-        ->leftJoin('c.user_id','u')
-        ->leftJoin('c.likes','l')
-        ->groupBy('c.id')
-        ->where('c.post_id = :post')
-        ->setParameter('post', $postId);
+        $qb->select('c.id', 'c.content', 'c.posted_at', 'u.username', 'COUNT(DISTINCT l.id) AS likesNumber')
+            ->leftJoin('c.user_id', 'u')
+            ->leftJoin('c.likes', 'l')
+            ->groupBy('c.id')
+            ->where('c.post_id = :post')
+            ->setParameter('post', $postId);
         $query = $qb->getQuery();
         $results = $query->getResult();
 
